@@ -1,0 +1,58 @@
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.brand-logo-img {
+  object-fit: contain;
+  translate: -3.61% 10.25%;
+  animation: brandFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 10px rgba(2, 6, 23, 0.18));
+}
+
+.brand-logo-img--sm { width: 30px; height: 30px; }
+.brand-logo-img--md { width: 40px; height: 40px; }
+.brand-logo-img--lg { width: 50px; height: 50px; }
+
+.brand-text {
+  display: inline-flex;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.brand-text--sm { font-size: 0.95rem; }
+.brand-text--md { font-size: 1.15rem; }
+.brand-text--lg { font-size: 1.6rem; }
+
+.brand-word {
+  text-shadow: none;
+}
+
+.brand-logo--dark .brand-smart {
+  color: #000000;
+}
+
+.brand-logo--dark .brand-timetable {
+  background-image: linear-gradient(90deg, #2563EB, #7C3AED);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-logo--light .brand-smart {
+  color: #60A5FA;
+}
+
+.brand-logo--light .brand-timetable {
+  color: #C084FC;
+}
+
+@keyframes brandFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}

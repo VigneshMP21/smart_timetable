@@ -1,0 +1,72 @@
+.auth-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37, 99, 235, 0.12), transparent),
+    #f8fafc;
+}
+
+.auth-loading-brand {
+  animation: authLoadingPulse 2s ease-in-out infinite;
+}
+
+.auth-loading-spinner {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+
+.auth-loading-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: authLoadingSpin 1.4s linear infinite;
+}
+
+.auth-loading-ring:nth-child(1) {
+  border-top-color: #2563eb;
+}
+
+.auth-loading-ring--2 {
+  inset: 8px;
+  border-top-color: #06b6d4;
+  animation-delay: 0.15s;
+}
+
+.auth-loading-ring--3 {
+  inset: 16px;
+  border-top-color: #8b5cf6;
+  animation-delay: 0.3s;
+}
+
+.auth-loading-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 0.02em;
+}
+
+@keyframes authLoadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes authLoadingPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(0.98);
+  }
+}

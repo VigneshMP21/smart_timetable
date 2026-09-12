@@ -1,0 +1,47 @@
+# ============================================
+# Frontend Dependencies - Automatic Timetable Scheduler
+# Install using: npm install
+# ============================================
+
+# Core React
+react>=18.3.1
+react-dom>=18.3.1
+
+# Routing
+react-router-dom>=6.26.0
+
+# HTTP Client
+axios>=1.7.2
+
+# Animation
+framer-motion>=11.3.8
+
+# UI Components & Icons
+react-icons>=5.3.0
+react-spinners>=0.14.1
+react-toastify>=10.0.5
+
+# Charts
+chart.js>=4.4.3
+react-chartjs-2>=5.2.0
+
+# File Upload
+react-dropzone>=14.2.3
+
+# Scroll & Animation Effects
+react-countup>=6.5.3
+react-intersection-observer>=11.0.0
+react-fast-marquee>=1.6.5
+react-type-animation>=3.2.0
+react-scroll>=1.9.3
+react-tilt>=1.0.2
+react-parallax-tilt>=1.7.337
+aos>=2.3.4
+
+# ============================================
+# Dev Dependencies
+# ============================================
+# @types/react>=18.3.3
+# @types/react-dom>=18.3.0
+# @vitejs/plugin-react>=4.3.1
+# vite>=5.4.0

@@ -1,0 +1,40 @@
+.reg-row {
+  display: block;
+}
+
+.reg-terms {
+  margin-bottom: 20px;
+}
+
+.reg-terms a {
+  color: #2563EB;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.reg-terms a:hover {
+  color: #1D4ED8;
+}
+
+.reg-terms-error {
+  color: #EF4444;
+}
+
+.reg-select {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #0F172A;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.reg-select:focus {
+  outline: none;
+}
+

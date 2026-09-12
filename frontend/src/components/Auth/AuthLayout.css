@@ -1,0 +1,1394 @@
+.al {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ============ LEFT PANEL ============ */
+.al-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: radial-gradient(1200px 800px at 20% 10%, #1E1B4B 0%, #0F172A 45%, #020617 100%);
+}
+
+/* ---- Background layers ---- */
+.al-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.al-aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.al-aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.al-aurora-1 {
+  width: 60%;
+  aspect-ratio: 1;
+  left: -18%;
+  top: -20%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.45), transparent 65%);
+  animation: alDrift1 18s ease-in-out infinite;
+}
+
+.al-aurora-2 {
+  width: 48%;
+  aspect-ratio: 1;
+  right: -14%;
+  top: 8%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.4), transparent 65%);
+  animation: alDrift2 22s ease-in-out infinite;
+}
+
+.al-aurora-3 {
+  width: 52%;
+  aspect-ratio: 1;
+  left: 18%;
+  bottom: -28%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.32), transparent 65%);
+  animation: alDrift3 26s ease-in-out infinite;
+}
+
+.al-aurora-conic {
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(
+    from 180deg at 30% 30%,
+    rgba(37, 99, 235, 0.12),
+    transparent 25%,
+    rgba(124, 58, 237, 0.12) 50%,
+    transparent 75%,
+    rgba(6, 182, 212, 0.1)
+  );
+  filter: blur(40px);
+  animation: alConic 30s linear infinite;
+}
+
+.al-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 82%);
+}
+
+.al-network {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.al-net-lines {
+  fill: none;
+  stroke-width: 0.15;
+  stroke-linecap: round;
+}
+
+.al-net-line {
+  stroke-dasharray: 0.5 3;
+  animation: alNetFlow 4s linear infinite;
+}
+
+.al-net-dot {
+  animation: alNetPulse 3.5s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.al-net-ring {
+  animation: alNetRing 3.5s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.al-rays {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.al-ray {
+  position: absolute;
+  width: 160%;
+  height: 240px;
+  filter: blur(60px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.al-ray-1 {
+  --r: -18deg;
+  top: 18%;
+  left: -30%;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.25), transparent);
+  animation: alRaySweep 12s ease-in-out infinite;
+}
+
+.al-ray-2 {
+  --r: 14deg;
+  top: 55%;
+  left: -20%;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.2), transparent);
+  animation: alRaySweep 16s ease-in-out infinite 2s;
+}
+
+.al-ray-3 {
+  --r: -10deg;
+  top: 80%;
+  left: -35%;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
+  animation: alRaySweep 20s ease-in-out infinite 4s;
+}
+
+.al-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* ---- Particles ---- */
+.al-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.al-particle {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+  animation-name: alParticleFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* ---- Glow orbs ---- */
+.al-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(20px);
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+.al-glow-1 {
+  width: 90px;
+  height: 90px;
+  background: rgba(96, 165, 250, 0.35);
+  top: 18%;
+  right: 12%;
+  animation: alGlowPulse 6s ease-in-out infinite;
+}
+
+.al-glow-2 {
+  width: 70px;
+  height: 70px;
+  background: rgba(167, 139, 250, 0.35);
+  bottom: 22%;
+  left: 10%;
+  animation: alGlowPulse 7s ease-in-out infinite 1.5s;
+}
+
+/* ---- Left content column ---- */
+.al-left-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 30px 40px 0;
+}
+
+.al-left-head {
+  position: relative;
+  z-index: 5;
+}
+
+.al-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.al-brand-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #6EE7B7;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.al-brand-live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34D399;
+  animation: alLiveBlink 1.4s ease-in-out infinite;
+}
+
+.al-heading {
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin: 0 0 10px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+}
+
+.al-sub {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #94A3B8;
+  max-width: 400px;
+  margin: 0;
+}
+
+/* ---- Scene ---- */
+.al-scene {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 400px;
+  margin-top: 6px;
+}
+
+.al-fpos {
+  position: absolute;
+  z-index: 3;
+  will-change: transform;
+}
+
+.al-float {
+  will-change: transform;
+}
+
+/* Floating card positions */
+.al-card-timetable { top: 3%; left: 3%; }
+.al-card-faculty { top: 5%; right: 2%; }
+.al-card-calendar { bottom: 9%; left: 2%; }
+.al-card-upload { bottom: 3%; right: 2%; }
+.al-card-conflicts { top: 44%; left: -1%; }
+.al-card-stats { top: 54%; right: -1%; }
+.al-clock-pos { bottom: 24%; left: 5%; }
+.al-chip-pos { top: -1%; left: 44%; }
+.al-cube-pos-1 { bottom: 36%; right: 7%; }
+.al-cube-pos-2 { top: 34%; left: 1%; }
+
+/* ---- Glass card base ---- */
+.al-card-inner {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow:
+    0 20px 50px rgba(2, 6, 23, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.al-card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.12) 40%,
+    rgba(255, 255, 255, 0.02) 60%,
+    transparent 80%
+  );
+  background-size: 220% 220%;
+  animation: alSheen 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ---- Timetable card ---- */
+.al-tt {
+  width: 210px;
+  padding: 14px 16px;
+}
+
+.al-tt-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.al-tt-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.al-tt-day {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #A78BFA;
+  background: rgba(124, 58, 237, 0.18);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+.al-tt-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.al-tt-row + .al-tt-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.al-tt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.al-tt-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.al-tt-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.al-tt-time {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.al-tt-room {
+  margin-left: auto;
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+/* ---- Faculty card ---- */
+.al-faculty {
+  width: 240px;
+  padding: 14px 16px;
+}
+
+.al-faculty-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-faculty-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.al-faculty-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  color: #6EE7B7;
+}
+
+.al-faculty-online i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34D399;
+  animation: alLiveBlink 1.4s ease-in-out infinite;
+}
+
+.al-faculty-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.al-faculty-row + .al-faculty-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.al-faculty-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.al-faculty-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.al-faculty-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+.al-faculty-dept {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.al-faculty-avail {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.6rem;
+  color: #6EE7B7;
+  white-space: nowrap;
+}
+
+.al-faculty-avail i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #34D399;
+}
+
+/* ---- 3D Calendar card ---- */
+.al-cal3d-wrap {
+  perspective: 700px;
+}
+
+.al-cal3d {
+  width: 210px;
+  padding: 12px 14px;
+  transform-style: preserve-3d;
+  animation: alCalSpin 14s ease-in-out infinite;
+}
+
+.al-cal3d-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-cal3d-head > span:first-child {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.al-cal3d-today {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #22D3EE;
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.al-cal3d-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-cal3d-dayname {
+  text-align: center;
+  font-size: 0.52rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 700;
+}
+
+.al-cal3d-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-cal3d-cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-size: 0.56rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.al-cal3d-cell.on {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.5), rgba(124, 58, 237, 0.5));
+  color: #fff;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
+}
+
+.al-cal3d-cell.today {
+  background: rgba(6, 182, 212, 0.25);
+  color: #fff;
+  box-shadow: 0 0 0 1.5px #22D3EE, 0 0 12px rgba(34, 211, 238, 0.5);
+}
+
+/* ---- Excel upload card ---- */
+.al-upload {
+  width: 230px;
+  padding: 14px 16px;
+}
+
+.al-upload-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-upload-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(37, 99, 235, 0.25));
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: #22D3EE;
+}
+
+.al-upload-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.al-upload-name {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.al-upload-size {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.al-upload-pct {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #22D3EE;
+  font-variant-numeric: tabular-nums;
+}
+
+.al-upload-track {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 10px 0 8px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.al-upload-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563EB, #7C3AED, #06B6D4);
+  background-size: 200% 100%;
+  animation: alFillSlide 3s linear infinite;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.6);
+}
+
+.al-upload-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.55);
+  position: relative;
+  z-index: 1;
+}
+
+.al-upload-hint svg {
+  color: #34D399;
+}
+
+.al-upload-hint b {
+  color: #E2E8F0;
+}
+
+/* ---- Conflict detection card ---- */
+.al-conflict {
+  width: 220px;
+  padding: 12px 14px;
+}
+
+.al-conflict-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-conflict-radar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.al-conflict-radar::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22D3EE;
+  box-shadow: 0 0 10px #22D3EE;
+}
+
+.al-conflict-radar i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  animation: alRadarPing 1.8s ease-out infinite;
+}
+
+.al-conflict-radar i:nth-child(2) { animation-delay: 0.6s; }
+.al-conflict-radar i:nth-child(3) { animation-delay: 1.2s; }
+
+.al-conflict-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34D399;
+  animation: alCheckPop 2.6s ease-in-out infinite;
+}
+
+.al-conflict-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.al-conflict-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.al-conflict-sub {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.al-conflict-sub-ok {
+  color: #6EE7B7;
+}
+
+/* ---- Statistics card ---- */
+.al-stats {
+  width: 180px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.al-stats-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(37, 99, 235, 0.3));
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: #A78BFA;
+  position: relative;
+  z-index: 1;
+}
+
+.al-stats-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-stats-num {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.al-stats-label {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- Clock card ---- */
+.al-clock-card {
+  width: 164px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.al-clock-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #60A5FA;
+  position: relative;
+  z-index: 1;
+  animation: alClockTick 4s ease-in-out infinite;
+}
+
+.al-clock-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-clock-time {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.al-clock-date {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- AI chip ---- */
+.al-chip-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(124, 58, 237, 0.25));
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 0 24px rgba(124, 58, 237, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.al-chip-inner svg {
+  color: #C4B5FD;
+  animation: alChipSpark 2.4s ease-in-out infinite;
+}
+
+/* ---- Glass cubes ---- */
+.al-cube-box,
+.al-cube-box-2 {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+}
+
+.al-cube-box {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.35), rgba(124, 58, 237, 0.2));
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.35), inset 0 0 12px rgba(167, 139, 250, 0.25);
+}
+
+.al-cube-box-2 {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(37, 99, 235, 0.2));
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.3), inset 0 0 12px rgba(34, 211, 238, 0.2);
+}
+
+/* ---- Central dashboard mockup ---- */
+.al-dash-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.al-dash-center {
+  position: relative;
+  width: min(380px, 62%);
+}
+
+.al-dash {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 40px 80px rgba(2, 6, 23, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.al-dash::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.al-dash-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.al-dash-dots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.al-dash-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.al-dash-dots i:nth-child(1) { background: #F87171; }
+.al-dash-dots i:nth-child(2) { background: #FBBF24; }
+.al-dash-dots i:nth-child(3) { background: #34D399; }
+
+.al-dash-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.al-dash-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #34D399;
+  white-space: nowrap;
+}
+
+.al-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34D399;
+  animation: alLiveBlink 1.4s ease-in-out infinite;
+}
+
+.al-dash-body {
+  padding: 12px 14px 14px;
+}
+
+.al-dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.al-dash-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 7px 4px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.al-dash-stat-num {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.al-dash-stat-label {
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+}
+
+.al-dash-stat-ok .al-dash-stat-num {
+  color: #34D399;
+}
+
+.al-dash-main {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.al-dash-chart,
+.al-dash-sched {
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.al-dash-chart-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.al-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 64px;
+  margin-top: 8px;
+}
+
+.al-chart-col {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.al-chart-bar {
+  width: 100%;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #A78BFA, #2563EB);
+  animation: alBarGrow 2.4s ease-in-out infinite;
+  transform-origin: bottom;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
+  will-change: transform;
+}
+
+.al-chart-days {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.al-chart-days span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+.al-sched-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.al-sched-cell {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s;
+}
+
+.al-sched-cell.on {
+  background: linear-gradient(135deg, #2563EB, #7C3AED);
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+  border-color: transparent;
+  animation: alCellIn 0.3s ease;
+}
+
+.al-sched-legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 7px;
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.al-legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #2563EB, #7C3AED);
+}
+
+.al-dash-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+  border: 1px solid rgba(167, 139, 250, 0.25);
+}
+
+.al-dash-spinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(167, 139, 250, 0.25);
+  border-top-color: #A78BFA;
+  animation: alSpin 0.9s linear infinite;
+}
+
+.al-dash-status-text {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.al-status-dots {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1px;
+  margin-left: 3px;
+}
+
+.al-status-dots i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #C4B5FD;
+  animation: alDotBlink 1.2s ease-in-out infinite;
+}
+
+.al-status-dots i:nth-child(2) { animation-delay: 0.2s; }
+.al-status-dots i:nth-child(3) { animation-delay: 0.4s; }
+
+.al-dash-status-pct {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #C4B5FD;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Marquee ---- */
+.al-marquee-strip {
+  position: relative;
+  z-index: 4;
+  margin: 18px -40px 0;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.al-marquee-strip::before,
+.al-marquee-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.al-marquee-strip::before {
+  left: 0;
+  background: linear-gradient(90deg, #0F172A, transparent);
+}
+
+.al-marquee-strip::after {
+  right: 0;
+  background: linear-gradient(-90deg, #0F172A, transparent);
+}
+
+.al-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 34px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(226, 232, 240, 0.6);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.al-marquee-icon {
+  color: #22D3EE;
+}
+
+/* ============ RIGHT ============ */
+.al-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: #F8FAFC;
+  overflow-y: auto;
+}
+
+.al-form-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ============ KEYFRAMES ============ */
+@keyframes alDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(12%, 8%) scale(1.15); }
+  66% { transform: translate(-8%, 14%) scale(0.95); }
+}
+
+@keyframes alDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-14%, 10%) scale(1.1); }
+  75% { transform: translate(6%, -8%) scale(1.2); }
+}
+
+@keyframes alDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  45% { transform: translate(10%, -12%) scale(1.15); }
+  70% { transform: translate(-6%, 6%) scale(0.9); }
+}
+
+@keyframes alConic {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes alNetFlow {
+  to { stroke-dashoffset: -3.5; }
+}
+
+@keyframes alNetPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes alNetRing {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes alRaySweep {
+  0%, 100% { transform: translateX(0) rotate(var(--r)); }
+  50% { transform: translateX(22%) rotate(var(--r)); }
+}
+
+@keyframes alParticleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  15% { opacity: var(--po, 0.6); }
+  50% { transform: translateY(-45px) translateX(12px); opacity: var(--po, 0.6); }
+  85% { opacity: var(--po, 0.6); }
+  100% { transform: translateY(-95px) translateX(-8px); opacity: 0; }
+}
+
+@keyframes alGlowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+@keyframes alLiveBlink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #34D399; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes alSheen {
+  0% { background-position: 120% 0; }
+  100% { background-position: -120% 0; }
+}
+
+@keyframes alCalSpin {
+  0%, 100% { transform: rotateY(-16deg) rotateX(6deg); }
+  50% { transform: rotateY(16deg) rotateX(-6deg); }
+}
+
+@keyframes alFillSlide {
+  to { background-position: -200% 0; }
+}
+
+@keyframes alRadarPing {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes alCheckPop {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
+  50% { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+}
+
+@keyframes alClockTick {
+  0%, 100% { transform: rotate(0); }
+  8% { transform: rotate(18deg); }
+  16% { transform: rotate(-6deg); }
+  24% { transform: rotate(0); }
+}
+
+@keyframes alChipSpark {
+  0%, 100% { transform: scale(1) rotate(0); opacity: 1; }
+  50% { transform: scale(1.25) rotate(20deg); opacity: 0.7; }
+}
+
+@keyframes alBarGrow {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.55); opacity: 0.75; }
+}
+
+@keyframes alCellIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes alSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes alDotBlink {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1280px) {
+  .al-dash-center { width: min(340px, 60%); }
+  .al-card-timetable { left: 1%; }
+  .al-card-upload { right: 1%; }
+  .al-clock-pos { left: 2%; }
+}
+
+@media (max-width: 1160px) {
+  .al-card-faculty { display: none; }
+  .al-card-stats { display: none; }
+  .al-card-calendar { bottom: 6%; left: 1%; }
+  .al-cube-pos-1 { right: 4%; }
+}
+
+@media (max-width: 1024px) {
+  .al {
+    grid-template-columns: 1fr;
+  }
+  .al-left {
+    display: none;
+  }
+  .al-right {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .al-right {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,150 @@
+/* ============================================================
+   Shared styles for the Smart Timetable feature:
+   Excel example tables, selection checkboxes, bulk action bar.
+   ============================================================ */
+
+/* ---------- Excel example table ---------- */
+.excel-example {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.excel-example-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--dash-text-muted);
+  margin: 0;
+}
+
+.excel-example-wrap {
+  border: 1px solid var(--dash-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--dash-glass-strong);
+}
+
+.excel-example-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.excel-example-table th {
+  text-align: left;
+  padding: 7px 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--dash-text-muted);
+  background: rgba(37, 99, 235, 0.06);
+  white-space: nowrap;
+}
+
+.excel-example-table td {
+  padding: 6px 10px;
+  color: var(--dash-text-soft);
+  border-top: 1px solid var(--dash-border);
+  white-space: nowrap;
+}
+
+/* ---------- Selection checkbox ---------- */
+.selection-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.selection-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.selection-checkbox-ui {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1.5px solid var(--dash-border);
+  background: var(--dash-glass-strong);
+  transition: background 0.15s var(--dash-ease), border-color 0.15s var(--dash-ease), box-shadow 0.15s var(--dash-ease);
+  position: relative;
+}
+
+.selection-checkbox input:checked + .selection-checkbox-ui {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-color: transparent;
+  box-shadow: 0 4px 10px -3px rgba(37, 99, 235, 0.5);
+}
+
+.selection-checkbox input:checked + .selection-checkbox-ui::after {
+  content: '';
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+.selection-checkbox input:indeterminate + .selection-checkbox-ui {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: var(--dash-primary);
+}
+
+.selection-checkbox input:indeterminate + .selection-checkbox-ui::after {
+  content: '';
+  width: 9px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--dash-primary);
+}
+
+.selection-checkbox input:focus-visible + .selection-checkbox-ui {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.selection-checkbox input:disabled + .selection-checkbox-ui {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selection-checkbox input:disabled {
+  pointer-events: none;
+}
+
+/* ---------- Bulk action bar ---------- */
+.bulk-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding: 10px 16px;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-radius: var(--dash-radius);
+  background: rgba(37, 99, 235, 0.07);
+}
+
+.bulk-bar-count {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dash-text);
+}
+
+.bulk-modal-warning {
+  font-size: 0.78rem;
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 0 0 16px;
+  line-height: 1.45;
+}

@@ -1,0 +1,30 @@
+.footer {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-text {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.footer-copyright {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-heart {
+  color: var(--danger);
+}

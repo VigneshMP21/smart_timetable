@@ -1,0 +1,133 @@
+.pm {
+  position: relative;
+}
+
+.pm-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 10px;
+  background: none;
+  transition: all 0.2s ease;
+}
+
+.pm-trigger:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.pm-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2563EB, #7C3AED);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.pm-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.pm-chevron {
+  color: #94A3B8;
+  transition: transform 0.2s ease;
+}
+
+.pm-chevron-open {
+  transform: rotate(180deg);
+}
+
+.pm-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.pm-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.pm-avatar-lg {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563EB, #7C3AED);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pm-user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.pm-user-email {
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+.pm-divider {
+  height: 1px;
+  background: #F1F5F9;
+}
+
+.pm-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+  background: none;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.pm-item:hover {
+  background: #F8FAFC;
+  color: #0F172A;
+}
+
+.pm-logout {
+  color: #EF4444;
+}
+
+.pm-logout:hover {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+.pm-danger {
+  color: #EF4444;
+}
+
+.pm-danger:hover {
+  background: #FEF2F2;
+  color: #DC2626;
+}

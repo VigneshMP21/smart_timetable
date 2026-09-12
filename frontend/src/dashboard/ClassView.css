@@ -1,0 +1,132 @@
+.class-view-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.class-view-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.class-select-wrapper {
+  position: relative;
+}
+
+.class-select {
+  appearance: none;
+  padding: 10px 36px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 160px;
+}
+
+.class-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.class-select-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .class-view-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .class-view-controls {
+    width: 100%;
+  }
+  .class-select {
+    flex: 1;
+  }
+}
+
+.class-view-errors {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  color: #991B1B;
+}
+
+.class-view-errors-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.class-view-errors ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.class-view-errors li {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.tt-cell-locked {
+  cursor: not-allowed;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.tt-cell-locked.lunch {
+  background: #FFFBEB;
+  border-left: 3px solid #F59E0B;
+  color: #92400E;
+}
+
+.tt-cell-locked.break {
+  background: #F0F9FF;
+  border-left: 3px solid #06B6D4;
+  color: #155E75;
+}
+
+.tt-cell-edit {
+  align-items: stretch;
+  gap: 4px;
+}
+
+.tt-edit-subject,
+.tt-edit-faculty {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 4px;
+  font-size: 0.625rem;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.tt-edit-faculty {
+  opacity: 0.9;
+}
+
+.tt-edit-faculty:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tt-cell-edit:hover {
+  transform: none;
+  box-shadow: none;
+}

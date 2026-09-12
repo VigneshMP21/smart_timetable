@@ -1,0 +1,237 @@
+.upload-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.upload-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.upload-import-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- Success / summary card ------------------------------------------- */
+.upload-success-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.upload-success-header {
+  background: linear-gradient(135deg, var(--success), #16A34A);
+  padding: 20px 24px;
+  color: white;
+}
+
+.upload-success-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.upload-success-message {
+  margin: 0;
+  font-size: 0.8125rem;
+  opacity: 0.95;
+}
+
+.upload-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.upload-summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 12px;
+  background: var(--card);
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.summary-row {
+  display: flex;
+  gap: 18px;
+}
+
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.summary-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.summary-value.imported {
+  color: var(--success);
+}
+
+.summary-value.skipped {
+  color: var(--text-muted);
+}
+
+.summary-sub {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.upload-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 24px;
+}
+
+.upload-actions-info {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.upload-actions-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* --- Validation errors card ------------------------------------------- */
+.upload-errors-card {
+  background: var(--card);
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.upload-errors-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FEF2F2;
+  border-bottom: 1px solid #FECACA;
+  padding: 16px 20px;
+  color: #B91C1C;
+}
+
+.upload-errors-header h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.upload-errors-message {
+  margin: 0;
+  padding: 14px 20px 0;
+  font-size: 0.8125rem;
+  color: #7F1D1D;
+}
+
+.upload-errors-list {
+  padding: 12px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.upload-error-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  background: #FEF2F2;
+  border: 1px solid #FEE2E2;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8125rem;
+}
+
+.upload-error-loc {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #B91C1C;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+}
+
+.upload-error-text {
+  color: #7F1D1D;
+}
+
+/* --- Info note --------------------------------------------------------- */
+.upload-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  border-radius: var(--radius);
+  color: #0369A1;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.upload-info > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.upload-info p {
+  margin: 0 0 6px;
+}
+
+.upload-info-sheets {
+  margin: 0 0 8px;
+  padding-left: 18px;
+}
+
+.upload-info-sheets li {
+  margin-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+  .upload-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .upload-actions-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .upload-actions-buttons .btn {
+    width: 100%;
+  }
+}

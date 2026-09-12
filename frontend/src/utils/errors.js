@@ -9,20 +9,25 @@
  */
 export function extractErrorMessage(err, fallback = 'Something went wrong. Please try again.') {
   const data = err?.response?.data;
-  if (!data) return fallback;
+  if (data) {
+    if (typeof data === 'string') return data;
+    if (typeof data.detail === 'string') return data.detail;
 
-  if (typeof data === 'string') return data;
-  if (typeof data.detail === 'string') return data.detail;
+    if (data.detail && typeof data.detail === 'object' && !Array.isArray(data.detail)) {
+      return data.detail.message || fallback;
+    }
 
-  if (data.detail && typeof data.detail === 'object' && !Array.isArray(data.detail)) {
-    return data.detail.message || fallback;
+    if (Array.isArray(data.detail)) {
+      return data.detail.map((d) => d.msg || d.error).filter(Boolean).join('; ') || fallback;
+    }
+
+    if (data.message) return data.message;
   }
 
-  if (Array.isArray(data.detail)) {
-    return data.detail.map((d) => d.msg || d.error).filter(Boolean).join('; ') || fallback;
-  }
+  if (typeof err === 'string') return err;
+  if (err?.message) return err.message;
 
-  return data.message || fallback;
+  return fallback;
 }
 
 /**

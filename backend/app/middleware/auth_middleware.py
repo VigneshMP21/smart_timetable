@@ -71,7 +71,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
         request.state.user = None
         path = request.url.path
 
-        if path in self.PUBLIC_PATHS:
+        if request.method == "OPTIONS" or path in self.PUBLIC_PATHS:
             return await call_next(request)
 
         token: Optional[str] = get_token_from_request(request)

@@ -17,29 +17,17 @@
  *   Swap AnimatePresence page transitions for router-agnostic ones here.
  */
 import { Suspense } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Outlet } from 'react-router-dom';
 import Loader from '../components/Loader/Loader';
 
 export default function MainContent() {
-  const location = useLocation();
-
   return (
     <main className="dash-main" id="dashboard-main">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={location.pathname}
-          className="dash-page"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <Suspense fallback={<Loader message="Loading page..." />}>
-            <Outlet />
-          </Suspense>
-        </motion.div>
-      </AnimatePresence>
+      <div className="dash-page">
+        <Suspense fallback={<Loader message="Loading page..." />}>
+          <Outlet />
+        </Suspense>
+      </div>
     </main>
   );
 }

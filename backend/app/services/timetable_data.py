@@ -343,7 +343,13 @@ class TimetableDataService:
             selectinload(TimetableEntry.faculty),
         )
         if user_id is not None:
-            query = query.where(TimetableEntry.created_by == user_id)
+            from sqlalchemy import or_
+            try:
+                import uuid
+                uid = uuid.UUID(str(user_id))
+                query = query.where(or_(TimetableEntry.created_by == uid, TimetableEntry.created_by.is_(None)))
+            except Exception:
+                query = query.where(or_(TimetableEntry.created_by == user_id, TimetableEntry.created_by.is_(None)))
         result = await db.execute(query)
         return list(result.scalars().all())
 

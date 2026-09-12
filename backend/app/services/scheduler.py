@@ -65,10 +65,36 @@ class SchedulerService:
         logger.info("Running auto scheduler over %d classes.", len(class_models))
         grid = AutoScheduler.schedule(class_models, config)
 
-        # 4. Persist results (replace the current user's previous timetable)
+        # 4. Persist results (replace previous timetable)
+        creator_uuid = None
         if user_id is not None:
+            try:
+                import uuid
+                from app.models.profile_model import Profile
+                from sqlalchemy import select
+                uid = uuid.UUID(str(user_id))
+                prof_res = await db.execute(select(Profile.id).where(Profile.id == uid))
+                if prof_res.scalar_one_or_none() is not None:
+                    creator_uuid = uid
+                else:
+                    # Attempt to create profile row if missing
+                    try:
+                        new_prof = Profile(id=uid, full_name="", role="user")
+                        db.add(new_prof)
+                        await db.commit()
+                        creator_uuid = uid
+                    except Exception:
+                        await db.rollback()
+                        creator_uuid = None
+            except Exception as e:
+                logger.warning(f"Could not verify profile for user {user_id}: {e}")
+                creator_uuid = None
+
+        if creator_uuid is not None:
             await db.execute(
-                delete(TimetableEntry).where(TimetableEntry.created_by == user_id)
+                delete(TimetableEntry).where(
+                    (TimetableEntry.created_by == creator_uuid) | (TimetableEntry.created_by.is_(None))
+                )
             )
         else:
             await db.execute(delete(TimetableEntry))
@@ -90,7 +116,7 @@ class SchedulerService:
                         end_time=None,
                         is_break=False,
                         is_lunch=False,
-                        created_by=user_id,
+                        created_by=creator_uuid,
                     )
                     db.add(entry)
                     entries_count += 1

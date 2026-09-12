@@ -44,6 +44,14 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
+    console.error('API Error details:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message,
+      code: error.code,
+    });
     if (error.code === 'ECONNABORTED') {
       error.message = 'Request timed out. Please try again.';
     } else if (!error.response) {
